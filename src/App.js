@@ -28,7 +28,7 @@ function App() {
   const [expenses, setExpenses] = useState(initialExpenses);
 
   const addExpense = (expense) => {
-    setExpenses([...expenses, expense]);
+    setExpenses(prev => [expense, ...prev]);
   }
 
   return (

@@ -6,16 +6,26 @@ const ExpenseForm = (props) => {
   const [date, setDate] = useState("");
   const [amount, setAmount] = useState("");
 
+  const closeForm = () => {
+    setTitle("");
+    setDate("");
+    setAmount("");
+    props.closeForm();
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     props.addExpenseHandler({
+      id: Math.random(),
       title: title,
       date: new Date(date),
       amount: amount,
     });
-    setTitle('');
-    setDate('');
-    setAmount('');
+    closeForm();
+  };
+
+  const resetHandler = (event) => {
+    closeForm();
   };
 
   const titleChangeHandler = (event) => {
@@ -31,7 +41,7 @@ const ExpenseForm = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} onReset={resetHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
@@ -59,6 +69,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="reset">Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
