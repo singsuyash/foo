@@ -19,7 +19,7 @@ const ExpenseForm = (props) => {
       id: Math.random(),
       title: title,
       date: new Date(date),
-      amount: amount,
+      amount: parseFloat(amount),
     });
     closeForm();
   };
